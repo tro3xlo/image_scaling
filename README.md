@@ -11,4 +11,6 @@ Image scaling written in C.
 - scale is determined by the ratio of source rectangle size and destination rectangle size, so
   xsize_srcrect 10 and xsize_dstrect 20 will horizontally strech the source rectangle to destination rectangle,
   ysize_srcrect 20 and ysize_dstrect 10 will vertically skew the source rectangle to destination rectangle
+- xstart_dstrect, ystart_dstrect, xstart_srcrect and ystart_srcrect can be negatively input, if so its absolute value is subtracted from its size value,
+- if any of rectangle sizes are less then 1 the procedure returns,
 - edge sampling increases computation time by at least 2 per axis if scale is not a whole number or the reciprocal value of scale is not a whole number.
