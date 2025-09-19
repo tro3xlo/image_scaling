@@ -37,6 +37,8 @@ void scale_image (
  if ( ysize_src <= 0 ) return;
  if ( xstart_dstrect >= xsize_dst ) return;
  if ( ystart_dstrect >= ysize_dst ) return;
+ if ( xstart_srcrect >= xsize_src ) return;
+ if ( ystart_srcrect >= ysize_src ) return;
  if ( xstart_dstrect < 0 ) {
   xsize_dstrect += xstart_dstrect;
   xstart_dstrect = 0;
@@ -49,9 +51,18 @@ void scale_image (
  }
  if ( ystart_dstrect + ysize_dstrect > ysize_dst ) ysize_dstrect = ysize_dst - ystart_dstrect;
  if ( ysize_dstrect <= 0 ) return;
-
- if ( xstart_srcrect < 0 || ystart_srcrect < 0 || xstart_srcrect >= xsize_src || ystart_srcrect >= ysize_src ) return;
- if ( xsize_srcrect <= 0 || ysize_srcrect <= 0 ) return;
+ if ( xstart_srcrect < 0 ) {
+  xsize_srcrect += xstart_srcrect;
+  xstart_srcrect = 0;
+ }
+ if ( xstart_srcrect + xsize_srcrect > xsize_src ) xsize_srcrect = xsize_src - xstart_srcrect;
+ if ( xsize_srcrect <= 0 ) return;
+ if ( ystart_srcrect < 0 ) {
+  ysize_srcrect += ystart_srcrect;
+  ystart_srcrect = 0;
+ }
+ if ( ystart_srcrect + ysize_srcrect > ysize_src ) ysize_srcrect = ysize_src - ystart_srcrect;
+ if ( ysize_srcrect <= 0 ) return;
  /* INITIAL VAR SET */
  xscale = ( float ) xsize_srcrect / ( float ) xsize_dstrect;
  yscale = ( float ) ysize_srcrect / ( float ) ysize_dstrect;
